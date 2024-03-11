@@ -1,5 +1,5 @@
 {
-    "start": {
+    "intro": {
       "title": "The Mysterious Forest",
       "story": [
         "You find yourself standing at the edge of a mysterious forest.",
@@ -36,7 +36,7 @@
         },
         {
           "text": "Retreat back to the edge of the forest",
-          "chapter": "start"
+          "chapter": "intro"
         }
       ]
     },

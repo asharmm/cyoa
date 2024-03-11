@@ -4,11 +4,15 @@ import (
 	"fmt"
 	"flag"
 	"os"
-	"json"
-	"github.com/asharmm/cyoa"
+	// "github.com/asharmm/cyoa"
+	"cyoa"
+	"log"
+	"net/http"
 )
 
 func main() {
+	
+	port := flag.Int("port",3000, "The port to start the server on")
 
 	filename := flag.String("filename", "tm_forest.json", "The JSON file with CYOA story.")
 	flag.Parse()
@@ -23,7 +27,13 @@ func main() {
 		panic(err)
 	}
 
+	story, err := cyoa.JsonStory(file); 
+	if err != nil {
+		panic(err)
+	}
 
-	decoder := json.NewDecoder(file)
-	var story cyoa.Story
+	h := cyoa.NewHandler(story)
+	fmt.Println("Starting the server on port : ", *port)
+
+	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%d",*port), h))
 }
